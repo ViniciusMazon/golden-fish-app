@@ -1,0 +1,25 @@
+.explorer-new {
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: #484848;
+}
+
+
+.explorer-new  svg {
+    padding-right: 10px;
+    font-size: 16px;
+}
+
+.explorer-new input {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.616);
+    width: 100%;
+    background: transparent;
+    height: 100%;
+    border-radius: 6px;
+    padding: 4px 8px;
+    color: #fff;
+}

@@ -1,0 +1,15 @@
+.explorer-item {
+    padding: 4px;
+    display: flex;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+.explorer-item:hover {
+    background-color: #484848;
+    transition: .2s;
+}
+
+.explorer-item span {
+    margin-left: 8px;
+}
