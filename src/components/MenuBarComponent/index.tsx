@@ -1,12 +1,18 @@
+import { useDock } from "../../context/Dock";
 import { MenuItemComponent, MenuItemComponentProps } from "../MenuItemComponent";
 import "./style.css";
 
 export const MenuBarComponent = () => {
+    const { setIsShowingFileExplorer, isShowingFileExplorer } = useDock();
+
+    function toggleFileExplorer() {
+        setIsShowingFileExplorer(!isShowingFileExplorer);
+    }
     const itens: MenuItemComponentProps[] = [
         {
             tooltip: "File explorer",
             icon: "folder",
-            action: () => { }
+            action: toggleFileExplorer
         },
         {
             tooltip: "Search",
@@ -42,13 +48,13 @@ export const MenuBarComponent = () => {
             <nav>
                 {
                     itens.map((item: MenuItemComponentProps) => (
-                        <MenuItemComponent {...item} />
+                        <MenuItemComponent key={item.tooltip} {...item} />
                     ))
                 }
                 <div className="divider" />
                 {
                     favorites.map((item: MenuItemComponentProps) => (
-                        <MenuItemComponent {...item} />
+                        <MenuItemComponent key={item.tooltip} {...item} />
                     ))
                 }
             </nav>

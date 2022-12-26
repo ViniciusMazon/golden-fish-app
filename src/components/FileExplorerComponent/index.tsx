@@ -1,9 +1,10 @@
 import "./styles.css";
-import { FiFilePlus, FiFolderPlus, FiChevronLeft } from "react-icons/fi";
-import { FileExplorerItemComponent } from "../FileExplorerItemComponent";
-import { FileExplorerFormComponent } from "../FileExplorerFormComponent";
+
+import { useDock } from "../../context/Dock";
+import { FileExplorerLayerComponent } from "../FileExplorerLayerComponent";
 
 export const FileExplorerComponent = () => {
+    const { isShowingFileExplorer } = useDock();
     const directoriesAndFolders = [
         {
             id: "fdafasdfa",
@@ -17,47 +18,16 @@ export const FileExplorerComponent = () => {
             parentId: "asfasda",
             type: "document"
         }
-    ]
+    ];
+
+    if (!isShowingFileExplorer) {
+        return (<></>);
+    }
 
     return (
         <div id="explorer-container">
-            <div className="explorer-content">
-                <div className="spacer">
-                    <FiChevronLeft />
-                    <div>
-                        <FiFolderPlus />
-                        <FiFilePlus />
-                    </div>
-                </div>
-
-
-                <FileExplorerFormComponent />
-
-
-                {
-                    directoriesAndFolders.map(item => (
-                        <FileExplorerItemComponent {...item} />
-                    ))
-                }
-            </div>
-
-            <div className="explorer-content">
-                <div className="spacer">
-                    <FiChevronLeft />
-                    <div>
-                        <FiFolderPlus />
-                        <FiFilePlus />
-                    </div>
-                </div>
-
-                <FileExplorerFormComponent />
-
-                {
-                    directoriesAndFolders.map(item => (
-                        <FileExplorerItemComponent {...item} />
-                    ))
-                }
-            </div>
+            <FileExplorerLayerComponent items={directoriesAndFolders} />
+            <FileExplorerLayerComponent items={directoriesAndFolders} />
         </div>
     )
 }

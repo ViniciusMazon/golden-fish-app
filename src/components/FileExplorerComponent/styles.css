@@ -7,22 +7,3 @@
     display: flex;
     font-size: 16px;
 }
-
-#explorer-container .explorer-content {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    border-right: 1px solid rgba(221, 221, 221, 0.164) ;
-}
-
-#explorer-container .spacer {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-}
-
-#explorer-container .spacer svg {
-    padding-right: 10px;
-    cursor: pointer;
-}
