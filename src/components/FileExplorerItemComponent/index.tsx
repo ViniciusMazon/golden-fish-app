@@ -1,8 +1,6 @@
 import "./styles.css";
 import { FiFolder, FiFile } from "react-icons/fi";
 import { document, directory } from "../FileExplorerComponent";
-import { useEffect } from "react";
-
 
 export interface FileExplorerItemProps {
     type: string;

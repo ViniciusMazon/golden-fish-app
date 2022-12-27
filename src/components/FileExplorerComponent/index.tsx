@@ -43,11 +43,11 @@ export const FileExplorerComponent = () => {
     }, []);
 
     async function init() {
-        const documents = await getDocuments("38b3694b-71ad-4abf-82d8-c188ddb1298b");
-        const directories = await getDirectories("38b3694b-71ad-4abf-82d8-c188ddb1298b");
+        const documents = await getDocuments("root");
+        const directories = await getDirectories("root");
         setLayerADocuments(documents.data);
         setLayerADirectories(directories.data);
-        setParentIdLayerA("38b3694b-71ad-4abf-82d8-c188ddb1298b");
+        setParentIdLayerA("root");
     }
 
     async function getDocuments(parentId: string | null) {
