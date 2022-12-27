@@ -28,6 +28,8 @@ export interface directory {
 export const FileExplorerComponent = () => {
     const { isShowingFileExplorer } = useDock();
 
+    const ownerId = "3f5b8cf2-f0c0-4ed3-af47-5fe63ce19155";
+    const [historyParentIdLayerA, setHistoryParentIdLayerA] = useState<string | null>(null);
     const [parentIdLayerA, setParentIdLayerA] = useState<string | null>(null);
     const [parentIdLayerB, setParentIdLayerB] = useState<string | null>(null);
 
@@ -56,14 +58,81 @@ export const FileExplorerComponent = () => {
         return await directoryService.getByParentId(parentId);
     }
 
+    function switchLayers() {
+        setHistoryParentIdLayerA(parentIdLayerA);
+        const layerADirectoriesTmp = layerADirectories;
+        const layerADocumentsTmp = layerADocuments;
+        const parentIdLayerATmp = parentIdLayerA;
+        setLayerADirectories(layerBDirectories);
+        setLayerADocuments(layerBDocuments);
+        setLayerBDirectories(layerADirectoriesTmp);
+        setLayerBDocuments(layerADocumentsTmp);
+        setParentIdLayerA(parentIdLayerB);
+        setParentIdLayerB(parentIdLayerATmp);
+    }
+
+    async function fillLayerA(rootId: string | null) {
+        const resultDirectoriesLayerA = await getDirectories(rootId);
+        const resultDocumentsLayerA = await getDocuments(rootId);
+        setParentIdLayerA(rootId);
+        setLayerADirectories(resultDirectoriesLayerA.data);
+        setLayerADocuments(resultDocumentsLayerA.data);
+    }
+
+    async function fillLayerB(rootId: string | null) {
+        const resultDirectoriesLayerB = await getDirectories(rootId);
+        const resultDocumentsLayerB = await getDocuments(rootId);
+        setParentIdLayerB(rootId);
+        setLayerBDirectories(resultDirectoriesLayerB.data);
+        setLayerBDocuments(resultDocumentsLayerB.data);
+    }
+
+    async function handleSelectItemLayerA(type: string, rootId: string) {
+        if (type === "directory") {
+            await fillLayerB(rootId);
+        }
+    }
+
+    async function handleSelectItemLayerB(type: string, rootId: string) {
+        if (type === "directory") {
+            switchLayers();
+            await fillLayerB(rootId);
+        }
+    }
+
+    function handleBackLayerB() {
+        setParentIdLayerB(null);
+        setLayerBDirectories([]);
+        setLayerBDocuments([]);
+    }
+
+    async function handleBackLayerA() {
+        switchLayers();
+        await fillLayerA(historyParentIdLayerA);
+    }
+
     if (!isShowingFileExplorer) {
         return (<></>);
     }
 
     return (
         <div id="explorer-container">
-            <FileExplorerLayerComponent parentId={parentIdLayerA} documents={layerADocuments} directories={layerADirectories} />
-            <FileExplorerLayerComponent parentId={parentIdLayerB} documents={layerBDocuments} directories={layerBDirectories}/>
+            <FileExplorerLayerComponent
+                ownerId={ownerId}
+                parentId={parentIdLayerA}
+                documents={layerADocuments}
+                directories={layerADirectories}
+                selectItem={handleSelectItemLayerA}
+                actionBack={handleBackLayerA}
+            />
+            <FileExplorerLayerComponent
+                ownerId={ownerId}
+                parentId={parentIdLayerB}
+                documents={layerBDocuments}
+                directories={layerBDirectories}
+                selectItem={handleSelectItemLayerB}
+                actionBack={handleBackLayerB}
+            />
         </div>
     )
 }

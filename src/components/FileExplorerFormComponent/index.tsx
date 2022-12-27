@@ -5,6 +5,7 @@ import { documentService } from "../../services/DocumentService";
 import { directoryService } from "../../services/DirectoryService";
 
 interface ExplorerFormProps {
+    ownerId: string;
     parentId: string | null;
     placeholder: string;
     type: string;
@@ -15,7 +16,8 @@ export const FileExplorerFormComponent = ({
     placeholder,
     type,
     toggle,
-    parentId
+    parentId,
+    ownerId
 }: ExplorerFormProps) => {
     const [title, setTitle] = useState("");
 
@@ -31,7 +33,7 @@ export const FileExplorerFormComponent = ({
 
     async function createDocument() {
         try {
-            await documentService.create(title, "a", parentId);
+            await documentService.create(title, ownerId, parentId);
         } catch (error) {
             console.error(error);
         }
@@ -39,7 +41,7 @@ export const FileExplorerFormComponent = ({
 
     async function createDirectory() {
         try {
-            await directoryService.create(title, "a", parentId);
+            await directoryService.create(title, ownerId, parentId);
         } catch (error) {
             console.error(error);
         }
