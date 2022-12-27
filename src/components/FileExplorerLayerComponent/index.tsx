@@ -3,12 +3,15 @@ import { FiFilePlus, FiFolderPlus, FiChevronLeft } from "react-icons/fi";
 import { FileExplorerItemComponent, FileExplorerItemProps } from "../FileExplorerItemComponent";
 import { FileExplorerFormComponent } from "../FileExplorerFormComponent";
 import { useState } from "react";
+import { directory, document } from "../FileExplorerComponent";
 
 interface ExplorerLayerProps {
-    items: FileExplorerItemProps[];
+    parentId: string | null;
+    documents: document[] | [];
+    directories: directory[] | [];
 }
 
-export const FileExplorerLayerComponent = ({ items }: ExplorerLayerProps) => {
+export const FileExplorerLayerComponent = ({ documents, directories, parentId }: ExplorerLayerProps) => {
     const [isFormDirectoryVisible, setIsFormDirectoryVisible] = useState(false);
     const [isFormDocumentVisible, setIsFormDocumentVisible] = useState(false);
 
@@ -33,16 +36,23 @@ export const FileExplorerLayerComponent = ({ items }: ExplorerLayerProps) => {
                 placeholder="Nome do diretório..."
                 type="directory"
                 toggle={handleToggleDirectoryForm}
+                parentId={parentId}
             />}
             {isFormDocumentVisible && <FileExplorerFormComponent
                 placeholder="Nome do documento..."
                 type="document"
                 toggle={handleToggleDocumentForm}
+                parentId={parentId}
             />}
 
             {
-                items.map(item => (
-                    <FileExplorerItemComponent {...item} />
+                directories.map(item => (
+                    <FileExplorerItemComponent key={item.id} type={"directory"} item={item} />
+                ))
+            }
+            {
+                documents.map(item => (
+                    <FileExplorerItemComponent key={item.id} type={"document"} item={item} />
                 ))
             }
         </div>

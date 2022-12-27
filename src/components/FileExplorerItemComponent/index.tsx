@@ -1,18 +1,22 @@
 import "./styles.css";
 import { FiFolder, FiFile } from "react-icons/fi";
+import { document, directory } from "../FileExplorerComponent";
+import { useEffect } from "react";
+
 
 export interface FileExplorerItemProps {
-    id: string;
-    title: string;
-    parentId: string;
     type: string;
+    item: document | directory;
 }
 
-export const FileExplorerItemComponent = (props: FileExplorerItemProps) => {
+export const FileExplorerItemComponent = ({ type, item }: FileExplorerItemProps) => {
+    useEffect(() => {
+        console.log(type)
+    })
     return (
-        <div className="explorer-item" key={props.id}>
-            {props.type === "document" ? <FiFile /> : <FiFolder />}
-            <span>item.title</span>
+        <div className="explorer-item">
+            {type === "document" ? <FiFile /> : <FiFolder />}
+            <span>{item.title}</span>
         </div>
     )
 }
