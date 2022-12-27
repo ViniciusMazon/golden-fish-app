@@ -1,7 +1,7 @@
 import './App.css';
 import { FileExplorerComponent } from './components/FileExplorerComponent';
 import { MenuBarComponent } from './components/MenuBarComponent';
-import { DockProvider } from './context/Dock';
+import { DockProvider, useDock } from './context/Dock';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
           <MenuBarComponent />
           <FileExplorerComponent />
 
-          <h1>Testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</h1>
+          <h1>Golden Fish - Let's hack!</h1>
         </header>
 
       </div>
