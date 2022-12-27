@@ -8,13 +8,14 @@ import { directory, document } from "../FileExplorerComponent";
 interface ExplorerLayerProps {
     ownerId: string;
     parentId: string | null;
+    selectedId: string | null;
     documents: document[] | [];
     directories: directory[] | [];
     selectItem: Function;
     actionBack: Function;
 }
 
-export const FileExplorerLayerComponent = ({ documents, directories, parentId, ownerId, selectItem, actionBack }: ExplorerLayerProps) => {
+export const FileExplorerLayerComponent = ({ documents, directories, parentId, ownerId, selectedId, selectItem, actionBack }: ExplorerLayerProps) => {
     const [isFormDirectoryVisible, setIsFormDirectoryVisible] = useState(false);
     const [isFormDocumentVisible, setIsFormDocumentVisible] = useState(false);
 
@@ -52,12 +53,12 @@ export const FileExplorerLayerComponent = ({ documents, directories, parentId, o
 
             {
                 directories.map(item => (
-                    <FileExplorerItemComponent key={item.id} type={"directory"} item={item} selectAction={selectItem} />
+                    <FileExplorerItemComponent key={item.id} type={"directory"} selectedId={selectedId} item={item} selectAction={selectItem} />
                 ))
             }
             {
                 documents.map(item => (
-                    <FileExplorerItemComponent key={item.id} type={"document"} item={item} selectAction={selectItem} />
+                    <FileExplorerItemComponent key={item.id} type={"document"} item={item} selectedId={selectedId} selectAction={selectItem} />
                 ))
             }
         </div>

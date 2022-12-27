@@ -7,12 +7,13 @@ import { useEffect } from "react";
 export interface FileExplorerItemProps {
     type: string;
     item: document | directory;
-    selectAction: Function
+    selectedId: string | null;
+    selectAction: Function;
 }
 
-export const FileExplorerItemComponent = ({ type, item, selectAction }: FileExplorerItemProps) => {
+export const FileExplorerItemComponent = ({ type, item, selectedId, selectAction }: FileExplorerItemProps) => {
     return (
-        <div className="explorer-item" onClick={() => selectAction(type, item.id)}>
+        <div className={`explorer-item ${selectedId === item.id ? "selected" : ""}`} onClick={() => selectAction(type, item.id)}>
             {type === "document" ? <FiFile /> : <FiFolder />}
             <span>{item.title}</span>
         </div>

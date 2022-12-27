@@ -34,6 +34,8 @@ export const FileExplorerFormComponent = ({
     async function createDocument() {
         try {
             await documentService.create(title, ownerId, parentId);
+            setTitle("");
+            toggle();
         } catch (error) {
             console.error(error);
         }
@@ -42,6 +44,8 @@ export const FileExplorerFormComponent = ({
     async function createDirectory() {
         try {
             await directoryService.create(title, ownerId, parentId);
+            setTitle("");
+            toggle();
         } catch (error) {
             console.error(error);
         }
@@ -50,7 +54,7 @@ export const FileExplorerFormComponent = ({
     return (
         <form className="explorer-new" onSubmit={handleSubmit}>
             {type === "document" ? <FiFile /> : <FiFolder />}
-            <input type="text" value={title} onChange={(event) => setTitle(event.target.value)} placeholder={placeholder} />
+            <input autoFocus type="text" value={title} onChange={(event) => setTitle(event.target.value)} placeholder={placeholder} />
             <FiMinusCircle onClick={handleCancelForm} />
         </form>
     )

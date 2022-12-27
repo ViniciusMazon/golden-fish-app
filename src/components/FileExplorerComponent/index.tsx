@@ -124,6 +124,7 @@ export const FileExplorerComponent = () => {
                 directories={layerADirectories}
                 selectItem={handleSelectItemLayerA}
                 actionBack={handleBackLayerA}
+                selectedId={parentIdLayerB}
             />
             <FileExplorerLayerComponent
                 ownerId={ownerId}
@@ -132,6 +133,7 @@ export const FileExplorerComponent = () => {
                 directories={layerBDirectories}
                 selectItem={handleSelectItemLayerB}
                 actionBack={handleBackLayerB}
+                selectedId={parentIdLayerB}
             />
         </div>
     )
