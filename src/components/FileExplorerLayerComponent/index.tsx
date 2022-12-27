@@ -13,9 +13,10 @@ interface ExplorerLayerProps {
     directories: directory[] | [];
     selectItem: Function;
     actionBack: Function;
+    reload: Function;
 }
 
-export const FileExplorerLayerComponent = ({ documents, directories, parentId, ownerId, selectedId, selectItem, actionBack }: ExplorerLayerProps) => {
+export const FileExplorerLayerComponent = ({ documents, directories, parentId, ownerId, selectedId, selectItem, actionBack, reload }: ExplorerLayerProps) => {
     const [isFormDirectoryVisible, setIsFormDirectoryVisible] = useState(false);
     const [isFormDocumentVisible, setIsFormDocumentVisible] = useState(false);
 
@@ -40,6 +41,7 @@ export const FileExplorerLayerComponent = ({ documents, directories, parentId, o
                 placeholder="Nome do diretório..."
                 type="directory"
                 toggle={handleToggleDirectoryForm}
+                reload={reload}
                 parentId={parentId}
                 ownerId={ownerId}
             />}
@@ -47,6 +49,7 @@ export const FileExplorerLayerComponent = ({ documents, directories, parentId, o
                 placeholder="Nome do documento..."
                 type="document"
                 toggle={handleToggleDocumentForm}
+                reload={reload}
                 parentId={parentId}
                 ownerId={ownerId}
             />}

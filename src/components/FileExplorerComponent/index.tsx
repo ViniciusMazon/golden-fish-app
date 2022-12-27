@@ -2,9 +2,9 @@ import "./styles.css";
 import { useDock } from "../../context/Dock";
 import { FileExplorerLayerComponent } from "../FileExplorerLayerComponent";
 import { useState, useEffect } from "react";
-import { FileExplorerItemProps } from "../FileExplorerItemComponent";
 import { documentService } from "../../services/DocumentService";
 import { directoryService } from "../../services/DirectoryService";
+import toast from 'react-hot-toast';
 
 export interface document {
     id: string;
@@ -48,6 +48,16 @@ export const FileExplorerComponent = () => {
         setLayerADocuments(documents.data);
         setLayerADirectories(directories.data);
         setParentIdLayerA("root");
+        toast('Tudo pronto!',
+            {
+                icon: '🐠',
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            }
+        );
     }
 
     async function getDocuments(parentId: string | null) {
@@ -125,6 +135,7 @@ export const FileExplorerComponent = () => {
                 selectItem={handleSelectItemLayerA}
                 actionBack={handleBackLayerA}
                 selectedId={parentIdLayerB}
+                reload={fillLayerA}
             />
             <FileExplorerLayerComponent
                 ownerId={ownerId}
@@ -134,6 +145,7 @@ export const FileExplorerComponent = () => {
                 selectItem={handleSelectItemLayerB}
                 actionBack={handleBackLayerB}
                 selectedId={parentIdLayerB}
+                reload={fillLayerB}
             />
         </div>
     )

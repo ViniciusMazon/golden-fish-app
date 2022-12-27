@@ -3,6 +3,7 @@ import { FiFolder, FiFile, FiMinusCircle } from "react-icons/fi";
 import { useState } from "react";
 import { documentService } from "../../services/DocumentService";
 import { directoryService } from "../../services/DirectoryService";
+import toast from 'react-hot-toast';
 
 interface ExplorerFormProps {
     ownerId: string;
@@ -10,12 +11,14 @@ interface ExplorerFormProps {
     placeholder: string;
     type: string;
     toggle: Function;
+    reload: Function;
 }
 
 export const FileExplorerFormComponent = ({
     placeholder,
     type,
     toggle,
+    reload,
     parentId,
     ownerId
 }: ExplorerFormProps) => {
@@ -36,6 +39,17 @@ export const FileExplorerFormComponent = ({
             await documentService.create(title, ownerId, parentId);
             setTitle("");
             toggle();
+            reload(parentId);
+            toast('Documento criado!',
+                {
+                    icon: '📄',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            );
         } catch (error) {
             console.error(error);
         }
@@ -46,6 +60,17 @@ export const FileExplorerFormComponent = ({
             await directoryService.create(title, ownerId, parentId);
             setTitle("");
             toggle();
+            reload(parentId);
+            toast('Diretório criado!',
+                {
+                    icon: '🖿',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            );
         } catch (error) {
             console.error(error);
         }
