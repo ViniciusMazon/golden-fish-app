@@ -11,4 +11,5 @@
     width: 45%;
     display: flex;
     font-size: 16px;
+    z-index: 2;
 }
