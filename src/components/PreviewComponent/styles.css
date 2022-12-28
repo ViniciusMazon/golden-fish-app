@@ -1,4 +1,4 @@
-#preview {
+.markdown-body {
     height: 100%;
     width: 50%;
     position: fixed;
@@ -9,3 +9,7 @@
     padding: 10px 20px;
     box-sizing: border-box;
 }
+
+.markdown-body pre {
+    background-color: rgba(27, 31, 35, 0.45);
+  }

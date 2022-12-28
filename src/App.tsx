@@ -10,10 +10,6 @@ import { PreviewComponent } from './components/PreviewComponent';
 const App: React.FC = () => {
   const [document, setDocument] = useState<string>("");
 
-  const onChange = React.useCallback((value: any, viewUpdate: any) => {
-    setDocument(value);
-  }, []);
-
   return (
     <DockProvider>
       <div className="App">
@@ -21,7 +17,7 @@ const App: React.FC = () => {
         <header className="App-header">
           <MenuBarComponent />
           <FileExplorerComponent />
-          <EditorComponet document={document} onChange={onChange} />
+          <EditorComponet document={document} setDocument={setDocument} />
           <PreviewComponent document={document} />
         </header>
 

@@ -9,12 +9,12 @@ import "./styles.css"
 
 interface EditorComponentProps {
     document: string;
-    onChange: (value: any, viewUpdate: any) => void;
+    setDocument: Function;
 }
 
 const stateFields = { history: historyField };
 
-export const EditorComponet = ({ document, onChange }: EditorComponentProps) => {
+export const EditorComponet = ({ document, setDocument }: EditorComponentProps) => {
     const serializedState = localStorage.getItem('myEditorState');
     const value = localStorage.getItem('myValue') || '';
 
@@ -38,6 +38,7 @@ export const EditorComponet = ({ document, onChange }: EditorComponentProps) => 
 
                     const state = viewUpdate.state.toJSON(stateFields);
                     localStorage.setItem('myEditorState', JSON.stringify(state));
+                    setDocument(value);
                 }}
 
                 theme={gruvboxDark}

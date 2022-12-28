@@ -8,7 +8,7 @@ interface Props {
 
 export const PreviewComponent = ({ document }: Props) => {
     return (
-        <div id="preview">
+        <div className="markdown-body">
             <ReactMarkdown
                 remarkPlugins={[gfm]}
             >{document}</ReactMarkdown>
