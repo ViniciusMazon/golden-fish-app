@@ -1,4 +1,5 @@
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
 import "./styles.css";
 
 interface Props {
@@ -8,7 +9,9 @@ interface Props {
 export const PreviewComponent = ({ document }: Props) => {
     return (
         <div id="preview">
-            <ReactMarkdown>{document}</ReactMarkdown>
+            <ReactMarkdown
+                remarkPlugins={[gfm]}
+            >{document}</ReactMarkdown>
         </div>
     )
 }
