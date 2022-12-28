@@ -6,14 +6,15 @@ import "./styles.css"
 
 
 interface EditorComponentProps {
+    document: string;
     onChange: (value: any, viewUpdate: any) => void;
 }
 
-export const EditorComponet = ({ onChange }: EditorComponentProps) => {
+export const EditorComponet = ({document, onChange }: EditorComponentProps) => {
     return (
         <div id="editor">
             <CodeMirror
-                value="console.log('hello world!');"
+                value={document || ""}
                 height="100%"
                 width="100%"
                 onChange={onChange}

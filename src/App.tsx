@@ -4,11 +4,14 @@ import { MenuBarComponent } from './components/MenuBarComponent';
 import { DockProvider } from './context/Dock';
 import { Toaster } from 'react-hot-toast';
 import { EditorComponet } from './components/EditorComponent';
-import React from 'react';
+import React, { useState } from 'react';
+import { PreviewComponent } from './components/PreviewComponent';
 
 const App: React.FC = () => {
+  const [document, setDocument] = useState<string>("");
+
   const onChange = React.useCallback((value: any, viewUpdate: any) => {
-    console.log('value:', value);
+    setDocument(value);
   }, []);
 
   return (
@@ -18,7 +21,8 @@ const App: React.FC = () => {
         <header className="App-header">
           <MenuBarComponent />
           <FileExplorerComponent />
-          <EditorComponet onChange={onChange} />
+          <EditorComponet document={document} onChange={onChange} />
+          <PreviewComponent document={document} />
         </header>
 
       </div>
