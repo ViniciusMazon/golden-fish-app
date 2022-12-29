@@ -23,6 +23,7 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
     "react-markdown": "^8.0.4",
+    "react-modal": "^3.16.1",
     "react-scripts": "5.0.1",
     "rehype-highlight": "^6.0.0",
     "remark-gfm": "^3.0.1",
@@ -53,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-modal": "^3.13.1"
   }
 }
