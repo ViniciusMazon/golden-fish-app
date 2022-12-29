@@ -3,25 +3,26 @@ import { FileExplorerComponent } from './components/FileExplorerComponent';
 import { MenuBarComponent } from './components/MenuBarComponent';
 import { DockProvider } from './context/Dock';
 import { Toaster } from 'react-hot-toast';
-import { EditorComponet } from './components/EditorComponent';
-import React, { useState } from 'react';
+import { EditorComponent } from './components/EditorComponent';
 import { PreviewComponent } from './components/PreviewComponent';
+import { DocumentProvider } from './context/Document';
+import { SearchComponent } from './components/SearchComponent';
 
 const App: React.FC = () => {
-  const [document, setDocument] = useState<string>("");
-
   return (
     <DockProvider>
-      <div className="App">
-        <Toaster />
-        <header className="App-header">
-          <MenuBarComponent />
-          <FileExplorerComponent />
-          <EditorComponet document={document} setDocument={setDocument} />
-          <PreviewComponent document={document} />
-        </header>
-
-      </div>
+      <DocumentProvider>
+        <div className="App">
+          <Toaster />
+          <header className="App-header">
+            <MenuBarComponent />
+            <FileExplorerComponent />
+            <EditorComponent />
+            <PreviewComponent />
+            <SearchComponent />
+          </header>
+        </div>
+      </DocumentProvider>
     </DockProvider>
   );
 }

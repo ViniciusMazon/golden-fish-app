@@ -3,10 +3,14 @@ import { MenuItemComponent, MenuItemComponentProps } from "../MenuItemComponent"
 import "./style.css";
 
 export const MenuBarComponent = () => {
-    const { setIsShowingFileExplorer, isShowingFileExplorer } = useDock();
+    const { setIsShowingFileExplorer, isShowingFileExplorer, setIsSearchOpen, isSearchOpen } = useDock();
 
     function toggleFileExplorer() {
         setIsShowingFileExplorer(!isShowingFileExplorer);
+    }
+
+    function toggleSearch() {
+        setIsSearchOpen(!isSearchOpen);
     }
     const itens: MenuItemComponentProps[] = [
         {
@@ -17,7 +21,7 @@ export const MenuBarComponent = () => {
         {
             tooltip: "Search",
             icon: "finder",
-            action: () => { }
+            action: toggleSearch
         },
         {
             tooltip: "Settings",

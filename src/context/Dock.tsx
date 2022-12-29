@@ -3,6 +3,8 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 type DockContextType = {
     isShowingFileExplorer: boolean;
     setIsShowingFileExplorer: React.Dispatch<React.SetStateAction<boolean>>;
+    isSearchOpen: boolean;
+    setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type DockContextProviderProps = {
@@ -13,10 +15,16 @@ export const DockContext = createContext({} as DockContextType);
 
 export function DockProvider(props: DockContextProviderProps) {
     const [isShowingFileExplorer, setIsShowingFileExplorer] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(true);
 
     return (
         <DockContext.Provider
-            value={{ isShowingFileExplorer, setIsShowingFileExplorer }}
+            value={{ 
+                isShowingFileExplorer,
+                setIsShowingFileExplorer,
+                isSearchOpen,
+                setIsSearchOpen
+            }}
         >
             {props.children}
         </DockContext.Provider>
@@ -30,10 +38,14 @@ export function useDock() {
 
     const {
         isShowingFileExplorer,
-        setIsShowingFileExplorer
+        setIsShowingFileExplorer,
+        isSearchOpen,
+        setIsSearchOpen
     } = context;
     return {
         isShowingFileExplorer,
-        setIsShowingFileExplorer
+        setIsShowingFileExplorer,
+        isSearchOpen,
+        setIsSearchOpen
     }
 }

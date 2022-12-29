@@ -1,10 +1,10 @@
 import "./styles.css";
 import { FiFolder, FiFile } from "react-icons/fi";
-import { document, directory } from "../FileExplorerComponent";
+import { Directory, Document } from "../../types";
 
 export interface FileExplorerItemProps {
     type: string;
-    item: document | directory;
+    item: Document | Directory;
     selectedId: string | null;
     selectAction: Function;
 }

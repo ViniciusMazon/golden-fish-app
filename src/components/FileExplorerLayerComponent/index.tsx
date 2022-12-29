@@ -3,14 +3,14 @@ import { FiFilePlus, FiFolderPlus, FiChevronLeft } from "react-icons/fi";
 import { FileExplorerItemComponent, FileExplorerItemProps } from "../FileExplorerItemComponent";
 import { FileExplorerFormComponent } from "../FileExplorerFormComponent";
 import { useState } from "react";
-import { directory, document } from "../FileExplorerComponent";
+import { Directory, Document } from "../../types";
 
 interface ExplorerLayerProps {
     ownerId: string;
     parentId: string | null;
     selectedId: string | null;
-    documents: document[] | [];
-    directories: directory[] | [];
+    documents: Document[] | [];
+    directories: Directory[] | [];
     selectItem: Function;
     actionBack: Function;
     reload: Function;

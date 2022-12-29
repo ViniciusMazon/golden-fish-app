@@ -1,47 +1,42 @@
 import CodeMirror from '@uiw/react-codemirror';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
-import { gruvboxDark } from "@uiw/codemirror-themes-all";
-import { historyField } from '@codemirror/commands';
-
+import { gruvboxDark, materialDark } from "@uiw/codemirror-themes-all";
 import "./styles.css"
+import { useDocument } from '../../context/Document';
+import { useEffect } from 'react';
+import { documentService } from "../../services/DocumentService";
 
+export const EditorComponent = () => {
+    const { currentDocument, setCurrentDocument } = useDocument();
 
-interface EditorComponentProps {
-    document: string;
-    setDocument: Function;
-}
-
-const stateFields = { history: historyField };
-
-export const EditorComponet = ({ document, setDocument }: EditorComponentProps) => {
-    const serializedState = localStorage.getItem('myEditorState');
-    const value = localStorage.getItem('myValue') || '';
-
+    useEffect(() => {
+        if (!currentDocument) return;
+        const id = setTimeout(() => {
+            console.log("Document saved!");
+            console.log(currentDocument);
+            documentService.update(currentDocument.id, currentDocument);
+        }, 2000);
+        return () => {
+            clearTimeout(id);
+        }
+    }, [currentDocument]);
 
     return (
         <div id="editor">
             <CodeMirror
-                value={document || ""}
+                value={currentDocument?.content || ""}
                 height="100%"
                 width="100%"
-                initialState={
-                    serializedState
-                        ? {
-                            json: JSON.parse(serializedState || ''),
-                            fields: stateFields,
-                        }
-                        : undefined
-                }
-                onChange={(value, viewUpdate) => {
-                    localStorage.setItem('myValue', value);
+                onChange={(value) => {
+                    if (!currentDocument) {
+                        return;
+                    }
 
-                    const state = viewUpdate.state.toJSON(stateFields);
-                    localStorage.setItem('myEditorState', JSON.stringify(state));
-                    setDocument(value);
+                    setCurrentDocument({...currentDocument, content: value});
                 }}
 
-                theme={gruvboxDark}
+                theme={materialDark}
                 extensions={[markdown({ base: markdownLanguage, codeLanguages: languages })]}
             />
         </div>
