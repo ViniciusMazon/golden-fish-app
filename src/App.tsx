@@ -7,6 +7,7 @@ import { EditorComponent } from './components/EditorComponent';
 import { PreviewComponent } from './components/PreviewComponent';
 import { DocumentProvider } from './context/Document';
 import { SearchComponent } from './components/SearchComponent';
+import { SettingsComponent } from './components/SettingsComponent';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
             <EditorComponent />
             <PreviewComponent />
             <SearchComponent />
+            <SettingsComponent />
           </header>
         </div>
       </DocumentProvider>

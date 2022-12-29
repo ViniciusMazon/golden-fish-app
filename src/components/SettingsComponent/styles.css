@@ -1,0 +1,87 @@
+#settings-modal {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.settings-menu {
+    background: rgba(72, 72, 72, 0.61);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(72, 72, 72, 0.3);
+    width: 30%;
+    color: #eee;
+    box-sizing: border-box;
+    border-radius: 8px 0 0 8px;
+}
+
+.settings-menu div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 8px;
+}
+
+.settings-menu ul {
+    text-decoration: none;
+    margin: 0;
+    margin-top: 15px;
+    padding: 0;
+}
+
+.settings-menu li {
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.settings-menu li:hover {
+    background: rgba(72, 72, 72, 0.774);
+    color: #fff;
+}
+
+.settings-menu svg {
+    cursor: pointer;
+}
+
+.settings-menu svg:hover {
+    cursor: pointer;
+    color: #fff;
+}
+
+.settings-menu button {
+    height: 30px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #eee;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #06c;
+    cursor: pointer;
+}
+
+.settings-menu button:hover {
+    background-color: rgb(4, 98, 192);
+    color: #fff;
+}
+
+.settings-options {
+    background-color: #484848;
+    width: 100%;
+    color: #eee;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 0 8px 8px 0;
+}
+
+.settings-options h1 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    font-size: 28px;
+    margin: 0;
+}
