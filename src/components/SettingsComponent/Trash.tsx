@@ -1,8 +1,19 @@
 import { useState } from "react";
 import Switch from "react-switch";
+import { FiCornerUpLeft } from "react-icons/fi";
+
+const mockDeletedDocuments = [
+    { id: '1', title: 'documento apagado 1' },
+    { id: '2', title: 'documento apagado 2' },
+    { id: '3', title: 'documento apagado 3' }
+]
 
 export const TrashSettings = () => {
     const [isAutoClean, setIsAutoClean] = useState(false);
+
+    async function restoreDocument(id: string) {
+
+    }
 
     return (
         <div>
@@ -14,10 +25,16 @@ export const TrashSettings = () => {
 
             <div className="input-group">
                 <label>Deleted files</label>
-                <ul>
-                    <li>Nome do arquivo excluido 1</li>
-                    <li>Nome do arquivo excluido 2</li>
-                    <li>Nome do arquivo excluido 3</li>
+                <ul className="deleted-files-list">
+                    {
+                        mockDeletedDocuments.map(doc => (
+                            <li key={doc.id} onClick={() => restoreDocument(doc.id)}>
+                                <span>{doc.title}</span>
+                                <FiCornerUpLeft />
+                            </li>
+                        ))
+                    }
+
                 </ul>
             </div>
 
