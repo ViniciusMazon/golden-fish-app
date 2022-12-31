@@ -53,6 +53,7 @@ export const FileExplorerItemComponent = ({ type, item, selectedId, selectAction
 
     async function handleSubmit() {
         try {
+            item.title = title;
             type === "document" ?
                 documentService.update(item.id, item as Document) :
                 directoryService.update(item.id, item)
@@ -65,10 +66,12 @@ export const FileExplorerItemComponent = ({ type, item, selectedId, selectAction
 
     if (isEditing) {
         return (
-            <form onSubmit={handleSubmit}>
+            <form className="explorer-item-edit" onSubmit={handleSubmit}>
                 <input type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
-                <FiMinusCircle onClick={handleToggleEdit} />
-                <FiTrash onClick={handleDelete} />
+                <div>
+                    <FiTrash onClick={handleDelete} />
+                    <FiMinusCircle onClick={handleToggleEdit} />
+                </div>
 
                 {isConfirmDeleteVisible && (
                     <Modal
@@ -108,11 +111,10 @@ export const FileExplorerItemComponent = ({ type, item, selectedId, selectAction
     return (
         <div
             className={`explorer-item ${selectedId === item.id ? "selected" : ""}`}
-            onClick={() => selectAction(type, item.id)}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
         >
-            <div>
+            <div onClick={() => selectAction(type, item.id)}>
                 {type === "document" ? <FiFile /> : <FiFolder />}
                 <span>{item.title}</span>
             </div>
