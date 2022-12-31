@@ -92,6 +92,16 @@ export const FileExplorerComponent = () => {
             setCurrentDocument(null);
             setCurrentDocument(target);
             setIsShowingFileExplorer(false);
+            toast(`Documento: ${target.title}`,
+                {
+                    icon: '🐠',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            );
         }
     }
 
@@ -106,6 +116,16 @@ export const FileExplorerComponent = () => {
             setCurrentDocument(null);
             setCurrentDocument(target);
             setIsShowingFileExplorer(false);
+            toast(`Documento: ${target.title}`,
+                {
+                    icon: '🐠',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            );
         }
     }
 
