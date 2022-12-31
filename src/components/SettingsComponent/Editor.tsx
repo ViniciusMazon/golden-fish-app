@@ -24,7 +24,7 @@ export const EditorSettings = () => {
 
             <div className="input-group">
                 <label>Lines number</label>
-                <Switch onChange={setIsLineNumbersActive} checked={isLineNumbersActive} />
+                <Switch  onChange={setIsLineNumbersActive} checked={isLineNumbersActive} />
             </div>
 
             <div className="input-group">

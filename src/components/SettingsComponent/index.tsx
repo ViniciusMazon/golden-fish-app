@@ -64,12 +64,12 @@ export const SettingsComponent = () => {
             <div id="settings-modal">
                 <div className="settings-menu">
                     <div>
-                        <FiArrowLeft onClick={closeSettings}/>
+                        <FiArrowLeft onClick={closeSettings} />
                         <button>Apply</button>
                     </div>
                     <ul>
                         {categories.map(item => (
-                            <li key={item} onClick={() => handleChangeCategory(item.toLowerCase())}>
+                            <li className={`${selectedCategory === item.toLowerCase() ? "selected-category" : ""}`} key={item} onClick={() => handleChangeCategory(item.toLowerCase())}>
                                 {item}
                             </li>
                         ))}

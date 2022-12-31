@@ -1,6 +1,6 @@
 export const GeneralSettings = () => {
     return (
-        <div>
+        <div id="general">
             <h1>General</h1>
             <div className="input-group">
                 <label>Initial screen</label>
