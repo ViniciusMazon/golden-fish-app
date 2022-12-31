@@ -3,7 +3,8 @@ import { FiFolder, FiFile, FiEdit2, FiMinusCircle, FiTrash } from "react-icons/f
 import { Directory, Document } from "../../types";
 import { useState } from "react";
 import Modal from 'react-modal';
-
+import { directoryService } from "../../services/DirectoryService";
+import { documentService } from "../../services/DocumentService";
 export interface FileExplorerItemProps {
     type: string;
     item: Document | Directory;
@@ -38,12 +39,28 @@ export const FileExplorerItemComponent = ({ type, item, selectedId, selectAction
     }
 
     function handleConfirmDelete() {
-        toggleConfirmDeleteModal();
-        handleToggleEdit();
+        try {
+            type === "document" ?
+                documentService.destroy(item.id) :
+                directoryService.destroy(item.id)
+        } catch (error) {
+            console.error(error);
+        } finally {
+            toggleConfirmDeleteModal();
+            handleToggleEdit();
+        }
     }
 
     async function handleSubmit() {
-        handleToggleEdit();
+        try {
+            type === "document" ?
+                documentService.update(item.id, item as Document) :
+                directoryService.update(item.id, item)
+        } catch (error) {
+            console.error(error);
+        } finally {
+            handleToggleEdit();
+        }
     }
 
     if (isEditing) {

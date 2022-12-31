@@ -16,11 +16,16 @@ async function getByParentId(parentId: string | null) {
 }
 
 async function update(documentId: string, document: Document) {
-    await await apiService.put(`/document/${documentId}`, document);
+    await apiService.put(`/document/${documentId}`, document);
+}
+
+async function destroy(documentId: string) {
+    await apiService.delete(`/document/${documentId}`)
 }
 
 export const documentService = {
     create,
     getByParentId,
-    update
+    update,
+    destroy
 }

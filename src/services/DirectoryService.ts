@@ -1,3 +1,4 @@
+import { Directory } from "../types";
 import apiService from "./ApiService";
 
 async function create(title: string, ownerId: string, parentId: string | null) {
@@ -13,7 +14,17 @@ async function getByParentId(parentId: string | null) {
     return result.data;
 }
 
+async function update(directoryId: string, directory: Directory) {
+    await apiService.put(`/document/${directoryId}`, directory);
+}
+
+async function destroy(directoryId: string) {
+    await apiService.delete(`/directory/${directoryId}`)
+}
+
 export const directoryService = {
     create,
-    getByParentId
+    getByParentId,
+    update,
+    destroy
 }
