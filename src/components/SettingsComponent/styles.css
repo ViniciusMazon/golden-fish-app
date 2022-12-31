@@ -20,7 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 8px;
+    padding: 8px;
 }
 
 .settings-menu ul {
@@ -32,8 +32,8 @@
 
 .settings-menu li {
     width: 100%;
-    padding: 8px;
     cursor: pointer;
+    padding: 8px;
 }
 
 .settings-menu li:hover {
@@ -84,4 +84,10 @@
     padding-bottom: 8px;
     font-size: 28px;
     margin: 0;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 18px;
 }

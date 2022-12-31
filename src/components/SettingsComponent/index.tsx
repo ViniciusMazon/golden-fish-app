@@ -2,9 +2,40 @@ import Modal from "react-modal"
 import { FiArrowLeft } from "react-icons/fi";
 import "./styles.css";
 import { useDock } from "../../context/Dock";
+import { useState } from "react";
+import { GeneralSettings } from "./General";
+import { EditorSettings } from "./Editor";
+import { PreviewSettings } from "./Preview";
+import { AccountSettings } from "./Account";
+import { TrashSettings } from "./Trash";
+
+interface ObjectMap {
+    [key: string]: JSX.Element
+}
 
 export const SettingsComponent = () => {
     const { isSettingsOpen, setIsSettingsOpen } = useDock();
+    const [selectedCategory, setSelectedCategory] = useState<string>("general");
+
+    const categories = [
+        "General",
+        "Editor",
+        "Preview",
+        "Account",
+        "Trash"
+    ];
+
+    const categoriesView: ObjectMap = {
+        "general": < GeneralSettings />,
+        "editor": <EditorSettings />,
+        "preview": <PreviewSettings />,
+        "account": <AccountSettings />,
+        "trash": <TrashSettings />
+    }
+
+    function handleChangeCategory(category: string) {
+        setSelectedCategory(category);
+    }
 
     function closeSettings() {
         setIsSettingsOpen(false);
@@ -33,18 +64,19 @@ export const SettingsComponent = () => {
             <div id="settings-modal">
                 <div className="settings-menu">
                     <div>
-                        <FiArrowLeft />
+                        <FiArrowLeft onClick={closeSettings}/>
                         <button>Apply</button>
                     </div>
                     <ul>
-                        <li>Account</li>
-                        <li>Editor</li>
-                        <li>Preview</li>
-                        <li>Privacy</li>
+                        {categories.map(item => (
+                            <li key={item} onClick={() => handleChangeCategory(item.toLowerCase())}>
+                                {item}
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 <div className="settings-options">
-                    <h1>Account</h1>
+                    {categoriesView[selectedCategory]}
                 </div>
             </div>
         </Modal>
