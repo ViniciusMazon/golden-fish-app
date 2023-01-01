@@ -3,19 +3,28 @@ import Modal from 'react-modal';
 import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useDock } from "../../context/Dock";
+import { documentService } from "../../services/DocumentService";
+import { Document } from "../../types";
 
 export const SearchComponent = () => {
-    const {isSearchOpen, setIsSearchOpen} = useDock();
+    const { isSearchOpen, setIsSearchOpen } = useDock();
     const [searchItem, setSearchItem] = useState("");
     const [isShowingResults, setIsShowingResults] = useState(false);
+    const [searchResult, setSearchResult] = useState<Document[]>([]);
 
     useEffect(() => {
         if (searchItem.length > 0) {
+            search();
             setIsShowingResults(true);
         } else {
             setIsShowingResults(false);
         }
     }, [searchItem]);
+
+    async function search() {
+        const result = await documentService.search(searchItem);
+        setSearchResult(result.data);
+    }
 
     function closeModal() {
         setIsSearchOpen(false);
@@ -50,12 +59,11 @@ export const SearchComponent = () => {
                 {isShowingResults &&
                     <div className="search-results">
                         <ul>
-                            <li>ok</li>
-                            <li>ok</li>
-                            <li>ok</li>
-                            <li>ok</li>
-                            <li>ok</li>
-                            <li>ok</li>
+                            {
+                                searchResult.map(doc => (
+                                    <li key={doc.id}>{doc.title}</li>
+                                ))
+                            }
                         </ul>
                     </div>
                 }

@@ -8,8 +8,12 @@ const mockDeletedDocuments = [
     { id: '3', title: 'documento apagado 3' }
 ]
 
-export const TrashSettings = () => {
-    const [isAutoClean, setIsAutoClean] = useState(false);
+interface Props {
+    isAutoClean: boolean;
+}
+
+export const TrashSettings = ({ isAutoClean }: Props) => {
+    const [isAuto, setIsAuto] = useState(isAutoClean);
 
     async function restoreDocument(id: string) {
 
@@ -20,7 +24,7 @@ export const TrashSettings = () => {
             <h1>Trash</h1>
             <div className="input-group">
                 <label>Auto clean</label>
-                <Switch checked={isAutoClean} onChange={setIsAutoClean} />
+                <Switch checked={isAuto} onChange={setIsAuto} />
             </div>
 
             <div className="input-group">

@@ -20,12 +20,18 @@ async function update(documentId: string, document: Document) {
 }
 
 async function destroy(documentId: string) {
-    await apiService.delete(`/document/${documentId}`)
+    await apiService.delete(`/document/${documentId}`);
+}
+
+async function search(title: string) {
+    const result = await apiService.get(`/document/search/${title}`);
+    return result.data;
 }
 
 export const documentService = {
     create,
     getByParentId,
     update,
-    destroy
+    destroy,
+    search
 }

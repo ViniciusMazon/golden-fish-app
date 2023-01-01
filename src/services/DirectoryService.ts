@@ -15,7 +15,7 @@ async function getByParentId(parentId: string | null) {
 }
 
 async function update(directoryId: string, directory: Directory) {
-    await apiService.put(`/document/${directoryId}`, directory);
+    await apiService.put(`/directory/${directoryId}`, directory);
 }
 
 async function destroy(directoryId: string) {

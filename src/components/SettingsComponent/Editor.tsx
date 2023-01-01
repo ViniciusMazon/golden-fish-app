@@ -1,13 +1,20 @@
 import { useState } from "react";
 import Switch from "react-switch";
 
+interface Props {
+    editorTheme: string;
+    isLineNumber: boolean;
+    editorFontSize: number;
+}
+
 const themesList = [
     "materialDark"
 ]
 
-export const EditorSettings = () => {
-    const [isLineNumbersActive, setIsLineNumbersActive] = useState(true);
-    const [themeSelected, setThemeSelected] = useState("materialDark");
+export const EditorSettings = ({ editorFontSize, isLineNumber, editorTheme }: Props) => {
+    const [isLineNumbersActive, setIsLineNumbersActive] = useState(isLineNumber);
+    const [themeSelected, setThemeSelected] = useState<string>(editorTheme || "materialDark");
+    const [fontSize, setFontSize] = useState<number>(editorFontSize);
 
     return (
         <div>
@@ -24,12 +31,12 @@ export const EditorSettings = () => {
 
             <div className="input-group">
                 <label>Lines number</label>
-                <Switch  onChange={setIsLineNumbersActive} checked={isLineNumbersActive} />
+                <Switch onChange={setIsLineNumbersActive} checked={isLineNumbersActive} />
             </div>
 
             <div className="input-group">
                 <label>Font size</label>
-                <input type="number" />
+                <input type="number" value={fontSize} onChange={(event) => setFontSize(Number(event.target.value))} />
             </div>
         </div>
     )

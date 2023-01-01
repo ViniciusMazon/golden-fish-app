@@ -1,8 +1,14 @@
 import { useState } from "react";
 import Switch from "react-switch";
 
-export const PreviewSettings = () => {
-    const [isPreviewVisible, setIsPreviewVisible] = useState(true);
+interface Props {
+    previewFontSize: number;
+    isPreview: boolean;
+}
+
+export const PreviewSettings = ({ previewFontSize, isPreview }: Props) => {
+    const [isPreviewVisible, setIsPreviewVisible] = useState(isPreview);
+    const [fontSize, setFontSize] = useState<number>(previewFontSize);
 
     return (
         <div>
@@ -10,7 +16,7 @@ export const PreviewSettings = () => {
 
             <div className="input-group">
                 <label>Font size</label>
-                <input type="number" />
+                <input type="number" value={fontSize} onChange={(event) => setFontSize(Number(event.target.value))} />
             </div>
 
             <div className="input-group">

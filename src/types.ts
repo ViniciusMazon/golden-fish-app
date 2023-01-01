@@ -16,3 +16,15 @@ export interface Directory {
     createdAt?: string;
     deletedAt?: string | null;
 }
+
+export interface Settings {
+    id: string;
+    initialScreen: string;
+    editorTheme: string;
+    isLineNumber: boolean;
+    editorFontSize: number;
+    previewFontSize: number;
+    isPreview: boolean;
+    isAutoClean: boolean;
+    userId: string;
+}

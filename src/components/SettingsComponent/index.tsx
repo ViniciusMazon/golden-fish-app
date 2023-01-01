@@ -2,20 +2,24 @@ import Modal from "react-modal"
 import { FiArrowLeft } from "react-icons/fi";
 import "./styles.css";
 import { useDock } from "../../context/Dock";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GeneralSettings } from "./General";
 import { EditorSettings } from "./Editor";
 import { PreviewSettings } from "./Preview";
 import { AccountSettings } from "./Account";
 import { TrashSettings } from "./Trash";
+import { settingsService } from "../../services/SettingsService";
+import { Settings } from "../../types";
 
 interface ObjectMap {
     [key: string]: JSX.Element
 }
 
 export const SettingsComponent = () => {
+    const userId = "3f5b8cf2-f0c0-4ed3-af47-5fe63ce19155";
     const { isSettingsOpen, setIsSettingsOpen } = useDock();
     const [selectedCategory, setSelectedCategory] = useState<string>("general");
+    const [settings, setSettings] = useState<Settings>();
 
     const categories = [
         "General",
@@ -26,11 +30,28 @@ export const SettingsComponent = () => {
     ];
 
     const categoriesView: ObjectMap = {
-        "general": < GeneralSettings />,
-        "editor": <EditorSettings />,
-        "preview": <PreviewSettings />,
+        "general": < GeneralSettings initialScreen={settings?.initialScreen ? settings.initialScreen : ""} />,
+        "editor": <EditorSettings
+            editorTheme={settings?.editorTheme || "materialDark"}
+            isLineNumber={settings?.isLineNumber || true}
+            editorFontSize={settings?.editorFontSize || 16}
+        />,
+        "preview": <PreviewSettings 
+            previewFontSize={settings?.previewFontSize || 16} 
+            isPreview={settings?.isPreview || true}
+        />,
         "account": <AccountSettings />,
-        "trash": <TrashSettings />
+        "trash": <TrashSettings isAutoClean={settings?.isAutoClean || false} />
+    }
+
+    useEffect(() => {
+        init();
+    }, [])
+
+    async function init() {
+        const result = await settingsService.getByUserId(userId);
+        setSettings(result.data);
+        console.log(settings);
     }
 
     function handleChangeCategory(category: string) {
