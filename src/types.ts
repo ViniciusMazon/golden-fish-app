@@ -28,3 +28,11 @@ export interface Settings {
     isAutoClean: boolean;
     userId: string;
 }
+
+export interface User {
+    id: string;
+    username: string;
+    password: string;
+    email: string;
+    avatarUrl: string;
+}

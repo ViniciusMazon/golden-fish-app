@@ -9,7 +9,9 @@ import { PreviewSettings } from "./Preview";
 import { AccountSettings } from "./Account";
 import { TrashSettings } from "./Trash";
 import { settingsService } from "../../services/SettingsService";
-import { Settings } from "../../types";
+import { userService } from "../../services/UserService";
+import { Settings, User } from "../../types";
+import { setSourceMapRange } from "typescript";
 
 interface ObjectMap {
     [key: string]: JSX.Element
@@ -20,6 +22,7 @@ export const SettingsComponent = () => {
     const { isSettingsOpen, setIsSettingsOpen } = useDock();
     const [selectedCategory, setSelectedCategory] = useState<string>("general");
     const [settings, setSettings] = useState<Settings>();
+    const [user, setUser] = useState<User>();
 
     const categories = [
         "General",
@@ -36,11 +39,14 @@ export const SettingsComponent = () => {
             isLineNumber={settings?.isLineNumber || true}
             editorFontSize={settings?.editorFontSize || 16}
         />,
-        "preview": <PreviewSettings 
-            previewFontSize={settings?.previewFontSize || 16} 
+        "preview": <PreviewSettings
+            previewFontSize={settings?.previewFontSize || 16}
             isPreview={settings?.isPreview || true}
         />,
-        "account": <AccountSettings />,
+        "account": <AccountSettings
+            username={user?.username || ""}
+            email={user?.email || ""}
+        />,
         "trash": <TrashSettings isAutoClean={settings?.isAutoClean || false} />
     }
 
@@ -49,9 +55,11 @@ export const SettingsComponent = () => {
     }, [])
 
     async function init() {
-        const result = await settingsService.getByUserId(userId);
-        setSettings(result.data);
-        console.log(settings);
+        const settingsResult = await settingsService.getByUserId(userId);
+        setSettings(settingsResult.data);
+
+        const userResult = await userService.getById(userId);
+        setUser(userResult.data);
     }
 
     function handleChangeCategory(category: string) {
